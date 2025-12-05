@@ -6,8 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     html, body { height: 100%; }
-    body { margin: 0; }
-    .iframe-full { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; }
+    body { 
+      margin: 0; 
+      background-color: #F5E6D3; /* Fond beige */
+    }
+    .iframe-full { 
+      position: fixed; 
+      inset: 0; 
+      width: 100%; 
+      height: 100%; 
+      border: 0; 
+      opacity: 0.95; /* Légère transparence pour laisser voir le fond beige */
+      mix-blend-mode: multiply; /* Mélange avec le fond beige */
+    }
     .overlay-header {
       position: fixed;
       top: 10px; left: 50%; transform: translateX(-50%);
@@ -25,13 +36,23 @@
       left: 6%;
       top: 28%;
       z-index: 10;
-      color: #fff;
+      color: #000; /* Texte en noir */
       pointer-events: none;
       font-family: "Helvetica Neue", Arial, sans-serif;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      text-shadow: none; /* Pas d'ombre pour meilleure lisibilité */
     }
-    .overlay-hero .kicker { font-size: 18px; letter-spacing: 0.06em; margin-bottom: 8px; }
-    .overlay-hero .title { font-size: 56px; font-weight: 700; line-height: 1.1; }
+    .overlay-hero .kicker { font-size: 18px; letter-spacing: 0.06em; margin-bottom: 8px; color: #000; }
+    .overlay-hero .title { font-size: 56px; font-weight: 700; line-height: 1.1; color: #000; }
+
+    /* Overlay beige pour couvrir le fond noir de l'iframe */
+    .beige-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: #F5E6D3;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
 
     /* Cover the white square on the right with a transparent div to hide it visually */
     .overlay-hide-box {
@@ -44,9 +65,17 @@
       background: transparent; /* we just occlude pointer, visual stays but our overlays dominate */
       pointer-events: none;
     }
+
+    /* Force tous les textes en noir */
+    * {
+      color: #000 !important;
+    }
   </style>
 </head>
 <body>
+  <!-- Overlay beige -->
+  <div class="beige-overlay"></div>
+  
   <header class="overlay-header">
     <img src="/logo/logo.png" alt="La Postrería">
   </header>
