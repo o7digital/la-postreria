@@ -9,6 +9,6 @@ cd "${ROOT_DIR}/Canvas 7 Files"
 PORT="${PORT:-8000}"
 
 echo "Serving Canvas car demo from: ${PWD}"
-echo "Open: http://localhost:${PORT}/demo-car.html"
+echo "Open: http://localhost:${PORT}/demo-cafe.html"
 
 python3 -m http.server "${PORT}"

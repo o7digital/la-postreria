@@ -4,8 +4,8 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/demo-car",
-      "destination": "/demo-car.html"
+      "source": "/demo-cafe",
+      "destination": "/demo-cafe.html"
     }
   ]
 }
