@@ -32,7 +32,7 @@
 
 	<style>
 		/* Fond beige pour tout le site */
-		body, #wrapper, .section, .page-section {
+		html, body, #wrapper, .section, .page-section {
 			background-color: #F5E6D3 !important;
 		}
 
@@ -64,6 +64,31 @@
 		/* Slider background beige */
 		#rev_slider_206_1_wrapper {
 			background-color: #F5E6D3 !important;
+		}
+
+		/* Assure que le slider lui-même reste beige */
+		#slider,
+		#rev_slider_206_1 {
+			background-color: #F5E6D3 !important;
+		}
+
+		/* Supprime l'image sombre du slider et impose le fond beige */
+		#rev_slider_206_1 li img.rev-slidebg,
+		.rev_slider_wrapper .tp-bgimg {
+			background-image: none !important;
+			background-color: #F5E6D3 !important;
+			opacity: 0 !important;
+		}
+
+		/* Supprime l'image sombre du slider et impose le fond beige */
+		#rev_slider_206_1 .rev-slidebg {
+			background-image: none !important;
+			background-color: #F5E6D3 !important;
+		}
+
+		/* Overlay du slider plus clair */
+		.rev_slider_wrapper .tp-shape.tp-shapewrapper {
+			background-color: rgba(245, 230, 211, 0.6) !important;
 		}
 	</style>
 
