@@ -111,6 +111,19 @@
 		.rev_slider_wrapper .tp-shape.tp-shapewrapper {
 			background-color: rgba(245, 230, 211, 0.6) !important;
 		}
+
+		/* Overlay du popup modal en beige au lieu de noir */
+		.mfp-bg {
+			background: #F5E6D3 !important;
+			opacity: 0.85 !important;
+		}
+
+		/* Assure que l'overlay reste beige même après fermeture */
+		.mfp-ready .mfp-bg,
+		.mfp-removing .mfp-bg {
+			background: #F5E6D3 !important;
+			opacity: 0.85 !important;
+		}
 	</style>
 
 	<!-- Document Title
@@ -255,7 +268,7 @@
 
 				<!-- Modal -->
 				<div class="modal1 mfp-hide subscribe-widget" id="myModal1">
-					<div class="block dark mx-auto" style="background: url('demos/cafe/images/others/modal.jpg') no-repeat; background-size: cover; max-width: 700px; box-shadow: 0px 0px 20px #000" data-height-xl="400">
+					<div class="block dark mx-auto" style="background: url('demos/cafe/images/others/modal.jpg') no-repeat; background-size: cover; max-width: 700px; box-shadow: 0px 0px 20px #F5E6D3" data-height-xl="400">
 						<div style="padding: 40px;">
 							<div class="widget-subscribe-form-result"></div>
 							<form class="widget-subscribe-form2" action="include/subscribe.php" method="post" style="max-width: 400px; margin-top: 130px;">
