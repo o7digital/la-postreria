@@ -662,5 +662,35 @@
 		}); /*ready*/
 	</script>
 
+	<script>
+		(function() {
+			var BEIGE = '#F5E6D3';
+
+			function forceBeige() {
+				var $ = window.jQuery;
+				$('#slider, #rev_slider_206_1_wrapper, #rev_slider_206_1').css('background', BEIGE);
+				$('#rev_slider_206_1 .tp-bgimg, #rev_slider_206_1 .rev-slidebg').css({
+					'background-image': 'none',
+					'background-color': BEIGE,
+					'opacity': '1'
+				});
+				$('#rev_slider_206_1 .tp-shape.tp-shapewrapper').css('background-color', 'rgba(245, 230, 211, 0.6)');
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				var $ = window.jQuery;
+				forceBeige();
+
+				var slider = $('#rev_slider_206_1');
+				slider.on('revolution.slide.onloaded revolution.slide.onchange videoexit', forceBeige);
+
+				var wrapper = document.getElementById('rev_slider_206_1_wrapper');
+				if (wrapper) {
+					new MutationObserver(forceBeige).observe(wrapper, { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] });
+				}
+			});
+		})();
+	</script>
+
 </body>
 </html>
