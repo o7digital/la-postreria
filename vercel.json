@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cp -r \"Canvas 7 Files\"/* . && cp \"Canvas 7 Files/demo-car.html\" index.html",
+  "buildCommand": "cp -r \"Canvas 7 Files\"/* . && cp \"Canvas 7 Files/demo-cafe.html\" index.html",
   "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
