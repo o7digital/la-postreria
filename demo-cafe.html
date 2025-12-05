@@ -650,5 +650,43 @@
 		}); /*ready*/
 	</script>
 
+	<script>
+		(function() {
+			var BEIGE = '#F5E6D3';
+
+			function forceBeige() {
+				var $ = window.jQuery;
+				$('body, #wrapper, html').css('background-color', BEIGE);
+				$('.mfp-bg').css('background', BEIGE);
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				var $ = window.jQuery;
+				forceBeige();
+
+				// Force beige après ouverture/fermeture du popup
+				$(document).on('mfpOpen mfpClose mfpBeforeClose mfpAfterClose', function() {
+					setTimeout(forceBeige, 100);
+					setTimeout(forceBeige, 500);
+					setTimeout(forceBeige, 1000);
+					forceBeige();
+				});
+
+				// Surveille les changements sur le body pour contrer le popup
+				var bodyObserver = new MutationObserver(function() {
+					$('body, #wrapper, html').css('background-color', BEIGE);
+					$('.mfp-bg').css('background', BEIGE);
+				});
+				bodyObserver.observe(document.body, { attributes: true, childList: true, subtree: false, attributeFilter: ['style', 'class'] });
+
+				// Réapplique périodiquement pour contrer les modifications
+				var fixInterval = setInterval(function() {
+					forceBeige();
+				}, 500);
+				setTimeout(function() { clearInterval(fixInterval); }, 30000);
+			});
+		})();
+	</script>
+
 </body>
 </html>

@@ -723,9 +723,29 @@
 					new MutationObserver(forceBeige).observe(wrapper, { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] });
 				}
 
+				// Force beige après ouverture/fermeture du popup
+				$(document).on('mfpOpen mfpClose mfpBeforeClose mfpAfterClose', function() {
+					setTimeout(forceBeige, 100);
+					setTimeout(forceBeige, 500);
+					setTimeout(forceBeige, 1000);
+					// Force beige sur tout le body et wrapper
+					$('body, #wrapper, html').css('background-color', BEIGE);
+				});
+
+				// Surveille les changements sur le body pour contrer le popup
+				var bodyObserver = new MutationObserver(function() {
+					$('body, #wrapper, html').css('background-color', BEIGE);
+					$('.mfp-bg').css('background', BEIGE);
+				});
+				bodyObserver.observe(document.body, { attributes: true, childList: true, subtree: false, attributeFilter: ['style', 'class'] });
+
 				// Réapplique périodiquement pour contrer les modifications du plugin
-				var fixInterval = setInterval(forceBeige, 1000);
-				setTimeout(function() { clearInterval(fixInterval); }, 15000);
+				var fixInterval = setInterval(function() {
+					forceBeige();
+					$('body, #wrapper, html').css('background-color', BEIGE);
+					$('.mfp-bg').css('background', BEIGE);
+				}, 500);
+				setTimeout(function() { clearInterval(fixInterval); }, 30000);
 			});
 		})();
 	</script>
