@@ -31,8 +31,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<style>
-		/* Fond beige pour tout le site */
-		html, body, #wrapper, .section, .page-section {
+		/* FORCE BEIGE ABSOLU sur html et body !!! */
+		html, 
+		body, 
+		#wrapper {
+			background-color: #F5E6D3 !important;
+		}
+
+		/* Force beige sur absolument TOUT après le popup */
+		body[class*="mfp"],
+		html[class*="mfp"],
+		body.compensate-for-scrollbar,
+		html.compensate-for-scrollbar,
+		body[style*="overflow"],
+		html[style*="overflow"] {
+			background-color: #F5E6D3 !important;
+			background: #F5E6D3 !important;
+		}
+
+		/* Sections en beige */
+		.section, .page-section,
+		#content, .content-wrap {
 			background-color: #F5E6D3 !important;
 		}
 
@@ -702,6 +721,7 @@
 
 			function forceBeige() {
 				var $ = window.jQuery;
+				// Force slider
 				$('#slider, #rev_slider_206_1_wrapper, #rev_slider_206_1').css('background', BEIGE);
 				$('#rev_slider_206_1 .tp-bgimg, #rev_slider_206_1 .rev-slidebg').css({
 					'background-image': 'none',
@@ -709,11 +729,24 @@
 					'opacity': '1'
 				});
 				$('#rev_slider_206_1 .tp-shape.tp-shapewrapper').css('background-color', 'rgba(245, 230, 211, 0.6)');
+				
+				// Force TOUT en beige
+				$('html, body, #wrapper').css({
+					'background-color': BEIGE,
+					'background': BEIGE
+				});
+				$('.mfp-bg').css('background', BEIGE);
 			}
 
 			document.addEventListener('DOMContentLoaded', function() {
 				var $ = window.jQuery;
 				forceBeige();
+
+				// Appelle forceBeige au chargement initial
+				setTimeout(forceBeige, 100);
+				setTimeout(forceBeige, 500);
+				setTimeout(forceBeige, 1000);
+				setTimeout(forceBeige, 2000);
 
 				var slider = $('#rev_slider_206_1');
 				slider.on('revolution.slide.onloaded revolution.slide.onchange revolution.slide.onvideostop', forceBeige);
@@ -723,29 +756,38 @@
 					new MutationObserver(forceBeige).observe(wrapper, { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] });
 				}
 
-				// Force beige après ouverture/fermeture du popup
-				$(document).on('mfpOpen mfpClose mfpBeforeClose mfpAfterClose', function() {
-					setTimeout(forceBeige, 100);
-					setTimeout(forceBeige, 500);
-					setTimeout(forceBeige, 1000);
-					// Force beige sur tout le body et wrapper
-					$('body, #wrapper, html').css('background-color', BEIGE);
+				// Force beige après ouverture/fermeture du popup - BEAUCOUP de fois !
+				$(document).on('mfpOpen mfpClose mfpBeforeClose mfpAfterClose mfpAfterChange', function() {
+					for (var i = 0; i < 10; i++) {
+						setTimeout(forceBeige, i * 100);
+					}
 				});
 
-				// Surveille les changements sur le body pour contrer le popup
-				var bodyObserver = new MutationObserver(function() {
-					$('body, #wrapper, html').css('background-color', BEIGE);
+				// Surveille AGRESSIVEMENT les changements sur html et body
+				var htmlObserver = new MutationObserver(function() {
+					$('html, body, #wrapper').css('background-color', BEIGE);
 					$('.mfp-bg').css('background', BEIGE);
 				});
-				bodyObserver.observe(document.body, { attributes: true, childList: true, subtree: false, attributeFilter: ['style', 'class'] });
+				htmlObserver.observe(document.documentElement, { 
+					attributes: true, 
+					attributeFilter: ['style', 'class'] 
+				});
 
-				// Réapplique périodiquement pour contrer les modifications du plugin
+				var bodyObserver = new MutationObserver(function() {
+					$('html, body, #wrapper').css('background-color', BEIGE);
+					$('.mfp-bg').css('background', BEIGE);
+				});
+				bodyObserver.observe(document.body, { 
+					attributes: true, 
+					childList: true, 
+					attributeFilter: ['style', 'class'] 
+				});
+
+				// Réapplique périodiquement TOUT LE TEMPS pendant 60 secondes
 				var fixInterval = setInterval(function() {
 					forceBeige();
-					$('body, #wrapper, html').css('background-color', BEIGE);
-					$('.mfp-bg').css('background', BEIGE);
-				}, 500);
-				setTimeout(function() { clearInterval(fixInterval); }, 30000);
+				}, 200);
+				setTimeout(function() { clearInterval(fixInterval); }, 60000);
 			});
 		})();
 	</script>
