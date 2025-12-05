@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Postrería - Pâtisserie Artisanale</title>
+<title>La Postrería - Repostería Artesanal</title>
 <style>
     * {
         margin: 0;
@@ -12,61 +12,186 @@
     }
     
     body {
-        margin: 0;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         background: #F5E6D3;
         color: #333;
         line-height: 1.6;
     }
 
-    /* HEADER AVEC LOGO */
+    /* HEADER */
     header {
-        width: 100%;
-        padding: 25px 50px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
         background: #F5E6D3;
         border-bottom: 2px solid #d4b896;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    header img {
-        height: 100px;
-    }
-
-    /* HERO */
-    .hero {
-        min-height: 60vh;
-        background: #F5E6D3;
+    
+    .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 80px;
-        gap: 60px;
     }
-    .hero-box {
-        flex: 1;
-        max-width: 500px;
+    
+    .logo img {
+        height: 80px;
     }
-    .hero-box h1 {
-        font-size: 64px;
-        margin: 0 0 20px;
+    
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        margin: 0;
+    }
+    
+    nav a {
+        text-decoration: none;
         color: #6a3d0f;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 500;
+        transition: color 0.3s;
     }
-    .hero-box p {
-        font-size: 22px;
-        line-height: 1.6;
-        color: #5a5a5a;
+    
+    nav a:hover {
+        color: #d4b896;
     }
-    .hero-image {
-        flex: 1;
-        max-width: 500px;
-    }
-    .hero-image img {
+
+    /* SLIDER HERO */
+    .slider {
+        position: relative;
         width: 100%;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0px 10px 40px rgba(0,0,0,0.15);
+        height: 600px;
+        overflow: hidden;
+        background: #000;
+    }
+    
+    .slides {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
+    }
+    
+    .slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .slide-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+        display: flex;
+        align-items: center;
+        padding: 0 100px;
+    }
+    
+    .slide-content {
+        color: white;
+        max-width: 600px;
+    }
+    
+    .slide-content h1 {
+        font-size: 64px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .slide-content p {
+        font-size: 24px;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 15px 40px;
+        background: #d4b896;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn:hover {
+        background: #6a3d0f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    /* Navigation du slider */
+    .slider-nav {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 10;
+    }
+    
+    .slider-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .slider-dot.active {
+        background: #d4b896;
+        width: 40px;
+        border-radius: 10px;
+    }
+    
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.3);
+        color: white;
+        border: none;
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s;
+        z-index: 10;
+    }
+    
+    .slider-arrow:hover {
+        background: rgba(212,184,150,0.9);
+    }
+    
+    .slider-arrow.prev {
+        left: 30px;
+    }
+    
+    .slider-arrow.next {
+        right: 30px;
     }
     }
 
@@ -102,13 +227,58 @@
         color: #6a3d0f;
     }
 
-    /* SECTION QR */
-    .qr {
-        text-align: center;
-        padding: 60px;
+    /* SECTION PRODUITS */
+    .section {
+        max-width: 1400px;
+        margin: 80px auto;
+        padding: 0 50px;
     }
-    .qr h2 {
+    
+    .section h2 {
+        font-size: 42px;
         color: #6a3d0f;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+    }
+    
+    .item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .item:hover {
+        transform: translateY(-10px);
+    }
+    
+    .item img, .item > div {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+    
+    .item h3 {
+        padding: 20px;
+        color: #6a3d0f;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #6a3d0f;
+        color: white;
+        text-align: center;
+        padding: 40px;
+        margin-top: 80px;
     }
 </style>
 </head>
@@ -116,45 +286,126 @@
 
 <!-- HEADER -->
 <header>
-    <img src="/public/logo/logo.jpeg" alt="La Postrería">
+    <div class="header-container">
+        <div class="logo">
+            <img src="/public/logo/logo.jpeg" alt="La Postrería">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#la-repostreria">La Repostrería</a></li>
+                <li><a href="#pasteles">Pasteles</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
-<!-- HERO -->
-<div class="hero">
-    <div class="hero-box">
-        <h1>La Postrería</h1>
-        <p>Repostería artesanal, pasteles de elote y sabores tradicionales.</p>
+<!-- SLIDER HERO -->
+<div class="slider" id="home">
+    <div class="slides" id="slides">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <img src="/public/pastel-elote.png" alt="Pastel de Elote">
+            <div class="slide-overlay">
+                <div class="slide-content">
+                    <h1>La Postrería</h1>
+                    <p>Repostería artesanal mexicana con el auténtico sabor de casa</p>
+                    <a href="#pasteles" class="btn">Ver Pasteles</a>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 - Vous ajouterez les autres images plus tard -->
+        <div class="slide">
+            <img src="/public/pastel-elote.png" alt="Nuestros Productos">
+            <div class="slide-overlay">
+                <div class="slide-content">
+                    <h1>Pastel de Elote</h1>
+                    <p>Hecho con maíz fresco y amor</p>
+                    <a href="#pasteles" class="btn">Descubrir</a>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+            <img src="/public/pastel-elote.png" alt="Tradición">
+            <div class="slide-overlay">
+                <div class="slide-content">
+                    <h1>Sabores Tradicionales</h1>
+                    <p>Recetas transmitidas de generación en generación</p>
+                    <a href="#contacto" class="btn">Contáctanos</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="hero-image">
-        <img src="/public/pastel-elote.png" alt="Pastel de Elote">
+    
+    <button class="slider-arrow prev" onclick="moveSlide(-1)">‹</button>
+    <button class="slider-arrow next" onclick="moveSlide(1)">›</button>
+    
+    <div class="slider-nav">
+        <span class="slider-dot active" onclick="currentSlide(0)"></span>
+        <span class="slider-dot" onclick="currentSlide(1)"></span>
+        <span class="slider-dot" onclick="currentSlide(2)"></span>
     </div>
 </div>
 
 <!-- PRODUITS -->
-<div class="section">
-    <h2>Nuestros Productos</h2>
+<div class="section" id="pasteles">
+    <h2>Nuestros Pasteles</h2>
     <div class="menu-grid">
         <div class="item">
-            <div style="background: #d4b896; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 48px;">🍰</div>
+            <div style="background: #d4b896; height: 250px; display: flex; align-items: center; justify-content: center; font-size: 64px;">🍰</div>
             <h3>Pastel de Elote</h3>
         </div>
         <div class="item">
-            <div style="background: #d4b896; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 48px;">🍮</div>
+            <div style="background: #d4b896; height: 250px; display: flex; align-items: center; justify-content: center; font-size: 64px;">🍮</div>
             <h3>Flan Casero</h3>
         </div>
         <div class="item">
-            <div style="background: #d4b896; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 48px;">🥧</div>
+            <div style="background: #d4b896; height: 250px; display: flex; align-items: center; justify-content: center; font-size: 64px;">🥧</div>
             <h3>Pay de Queso</h3>
         </div>
     </div>
 </div>
 
-<!-- QR -->
-<div class="qr">
-    <h2>Escanea y Ordena</h2>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Contacto%20La%20Postrería"
-         alt="QR Code">
-</div>
+<!-- FOOTER -->
+<footer id="contacto">
+    <h2>Contacto</h2>
+    <p>La Postrería - Repostería Artesanal</p>
+    <p>© 2025 Todos los derechos reservados</p>
+</footer>
+
+<script>
+let currentIndex = 0;
+const slides = document.getElementById('slides');
+const dots = document.querySelectorAll('.slider-dot');
+const totalSlides = 3;
+
+function moveSlide(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = totalSlides - 1;
+    if (currentIndex >= totalSlides) currentIndex = 0;
+    updateSlider();
+}
+
+function currentSlide(index) {
+    currentIndex = index;
+    updateSlider();
+}
+
+function updateSlider() {
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+// Auto-slide toutes les 5 secondes
+setInterval(() => {
+    moveSlide(1);
+}, 5000);
+</script>
 
 </body>
 </html>
